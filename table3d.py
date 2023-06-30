@@ -19,6 +19,7 @@ left_hip_mm = LeftHip * conversion_factor
 left_knee_mm = LeftKnee * conversion_factor
 left_ankle_mm = LeftAnkle * conversion_factor
 #color of joints
+#ok but this is my comment
 
 # Define the grid
 grid_resolution = 50  # Increase the resolution for smoother surface
