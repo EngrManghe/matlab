@@ -21,6 +21,7 @@ left_ankle_mm = LeftAnkle * conversion_factor
 #color of joints
 #ok but this is my comment
 #this is my comment again - Fidel
+#but this hello from Ruslan
 
 # Define the grid
 grid_resolution = 50  # Increase the resolution for smoother surface
