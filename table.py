@@ -22,9 +22,9 @@ LeftAnkle = df['LeftAnkle'].tolist()
 RightAnkle = df['RightAnkle'].tolist()
 
 
-#IT IS OUR SETTINGS SECTION ALL CHANGES ONLY HERE
-graph = LeftShoulder #CHANGE THIS ONLY
-graph_name = "LeftShoulder" #CHANGE THIS ALSO
+# IT IS OUR SETTINGS SECTION ALL CHANGES ONLY HERE
+graph = LeftShoulder  # CHANGE THIS ONLY
+graph_name = "LeftShoulder"  # CHANGE THIS ALSO
 
 print(time)
 print(graph)
@@ -32,8 +32,6 @@ print(graph)
 
 # Calculate the time differences and angular displacements
 time_diff = np.diff(time)
-
-
 angular_displacement = np.diff(graph)
 
 # Calculate the angular velocity
@@ -59,7 +57,18 @@ plt.title("Smoothed Angular Velocity " + graph_name)
 plt.xlabel("Time (ms)")
 plt.ylabel("Angular Velocity")
 
-plt.xticks(np.arange(fine_time[0], fine_time[-1]+1, 500))
+plt.xticks(np.arange(fine_time[0], fine_time[-1] + 1, 500))
+
+def onclick(event):
+    if event.button == 1:  # Check if left mouse button is clicked
+        x = event.xdata
+        y = interpolated_func(x)
+        if y is not None:  # Check if y-value is not None (i.e., clicked within the curve)
+            plt.plot(x, y, 'ro')
+            plt.text(x, y, f'({x:.2f}, {y:.2f})', verticalalignment='bottom', horizontalalignment='right')
+            plt.draw()
+
+plt.gcf().canvas.mpl_connect('button_press_event', onclick)
 
 # Show the plot
 plt.show()
