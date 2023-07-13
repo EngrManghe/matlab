@@ -43,7 +43,7 @@ smooth_angular_velocity_knee = interpolated_func_knee(fine_time)
 smooth_angular_velocity_hip = interpolated_func_hip(fine_time)
 
 # Set the y-axis display range from -3 to +3
-plt.ylim(-1, 1)
+plt.ylim(-3, 3)
 
 # Create scatter plots with smoothed lines
 plt.plot(fine_time, smooth_angular_velocity_ankle, color='red', label='LeftAnkle')
