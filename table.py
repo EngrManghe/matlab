@@ -30,7 +30,8 @@ print(time)
 print(graph)
 
 
-# Calculate the time differences and angular displacements
+# Calculate the time diff
+# erences and angular displacements
 time_diff = np.diff(time)
 angular_displacement = np.diff(graph)
 
