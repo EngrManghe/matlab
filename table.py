@@ -23,15 +23,14 @@ LeftAnkle = df['LeftAnkle'].tolist()
 RightAnkle = df['RightAnkle'].tolist()
 
 # IT IS OUR SETTINGS SECTION ALL CHANGES ONLY HERE
-graph = LeftShoulder  # CHANGE THIS ONLY
+graph = RightElbow  # CHANGE THIS ONLY
 graph_name = [k for k, v in locals().items() if v is graph][0]
 
 print(time)
 print(graph)
 
 
-# Calculate the time diff
-# erences and angular displacements
+# Calculate the time differences and angular displacements
 time_diff = np.diff(time)
 angular_displacement = np.diff(graph)
 
@@ -78,6 +77,20 @@ def onclick(event):
             last_point = points.pop()
             plt.plot(last_point[0], last_point[1], 'w.', markersize=15)  # Erase last dot
             plt.draw()
+
+# Find the indices of maximum and minimum values
+max_index = np.argmax(smooth_angular_velocity)
+min_index = np.argmin(smooth_angular_velocity)
+
+# Plot maximum and minimum points
+plt.plot(fine_time[max_index], smooth_angular_velocity[max_index], 'ro')
+plt.plot(fine_time[min_index], smooth_angular_velocity[min_index], 'ro')
+
+# Display values for maximum and minimum points
+plt.text(fine_time[max_index], smooth_angular_velocity[max_index], f'({fine_time[max_index]:.2f}, {smooth_angular_velocity[max_index]:.2f})',
+         verticalalignment='bottom', horizontalalignment='right')
+plt.text(fine_time[min_index], smooth_angular_velocity[min_index], f'({fine_time[min_index]:.2f}, {smooth_angular_velocity[min_index]:.2f})',
+         verticalalignment='top', horizontalalignment='left')
 
 plt.gcf().canvas.mpl_connect('button_press_event', onclick)
 
