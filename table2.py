@@ -58,5 +58,32 @@ plt.legend()
 
 plt.xticks(np.arange(fine_time[0], fine_time[-1]+1, 200))
 
+points = []  # Store the clicked points
+
+def onclick(event):
+    if event.button == 1:  # Left mouse button
+        x = event.xdata
+        y_ankle = interpolated_func_ankle(x)
+        y_knee = interpolated_func_knee(x)
+        y_hip = interpolated_func_hip(x)
+        if y_ankle is not None:
+            points.append((x, y_ankle, y_knee, y_hip))
+            plt.plot(x, y_ankle, 'ro')
+            plt.plot(x, y_knee, 'bo')
+            plt.plot(x, y_hip, 'go')
+            plt.text(x, y_ankle, f'Ankle: ({x:.2f}, {y_ankle:.2f})', verticalalignment='bottom', horizontalalignment='right')
+            plt.text(x, y_knee, f'Knee: ({x:.2f}, {y_knee:.2f})', verticalalignment='bottom', horizontalalignment='right')
+            plt.text(x, y_hip, f'Hip: ({x:.2f}, {y_hip:.2f})', verticalalignment='bottom', horizontalalignment='right')
+        plt.draw()
+    elif event.button == 3:  # Right mouse button
+        if points:
+            last_point = points.pop()
+            plt.plot(last_point[0], last_point[1], 'w.', markersize=15)  # Erase Ankle dot
+            plt.plot(last_point[0], last_point[2], 'w.', markersize=15)  # Erase Knee dot
+            plt.plot(last_point[0], last_point[3], 'w.', markersize=15)  # Erase Hip dot
+            plt.draw()
+
+plt.gcf().canvas.mpl_connect('button_press_event', onclick)
+
 # Show the plot
 plt.show()
