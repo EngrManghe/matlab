@@ -23,7 +23,7 @@ LeftAnkle = df['LeftAnkle'].tolist()
 RightAnkle = df['RightAnkle'].tolist()
 
 # IT IS OUR SETTINGS SECTION ALL CHANGES ONLY HERE
-graph = RightElbow  # CHANGE THIS ONLY
+graph = RightHip  # CHANGE THIS ONLY
 graph_name = [k for k, v in locals().items() if v is graph][0]
 
 print(time)
@@ -47,7 +47,7 @@ fine_time = np.linspace(time[1], time[-1], num=2000)
 smooth_angular_velocity = interpolated_func(fine_time)
 
 # Set the y-axis display range from -3 to +3
-plt.ylim(-3, 3)
+plt.ylim(-0.5, 0.5)
 
 # Create a scatter plot with smoothed line
 plt.plot(fine_time, smooth_angular_velocity, '-')
@@ -96,3 +96,39 @@ plt.gcf().canvas.mpl_connect('button_press_event', onclick)
 
 # Show the plot
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3
