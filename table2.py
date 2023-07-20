@@ -58,48 +58,6 @@ plt.legend()
 
 plt.xticks(np.arange(fine_time[0], fine_time[-1]+1, 500))
 
-# Find the indices of maximum and minimum values for each graph
-ankle_max_index = np.argmax(smooth_angular_velocity_ankle)
-ankle_min_index = np.argmin(smooth_angular_velocity_ankle)
-
-knee_max_index = np.argmax(smooth_angular_velocity_knee)
-knee_min_index = np.argmin(smooth_angular_velocity_knee)
-
-hip_max_index = np.argmax(smooth_angular_velocity_hip)
-hip_min_index = np.argmin(smooth_angular_velocity_hip)
-
-# Plot maximum and minimum points for each graph
-plt.plot(fine_time[ankle_max_index], smooth_angular_velocity_ankle[ankle_max_index], 'ro')
-plt.plot(fine_time[ankle_min_index], smooth_angular_velocity_ankle[ankle_min_index], 'ro')
-
-plt.plot(fine_time[knee_max_index], smooth_angular_velocity_knee[knee_max_index], 'ro')
-plt.plot(fine_time[knee_min_index], smooth_angular_velocity_knee[knee_min_index], 'ro')
-
-plt.plot(fine_time[hip_max_index], smooth_angular_velocity_hip[hip_max_index], 'ro')
-plt.plot(fine_time[hip_min_index], smooth_angular_velocity_hip[hip_min_index], 'ro')
-
-# Display values for maximum and minimum points for each graph
-plt.text(fine_time[ankle_max_index], smooth_angular_velocity_ankle[ankle_max_index],
-         f'Ankle Max: ({fine_time[ankle_max_index]:.2f}, {smooth_angular_velocity_ankle[ankle_max_index]:.2f})',
-         verticalalignment='bottom', horizontalalignment='right')
-plt.text(fine_time[ankle_min_index], smooth_angular_velocity_ankle[ankle_min_index],
-         f'Ankle Min: ({fine_time[ankle_min_index]:.2f}, {smooth_angular_velocity_ankle[ankle_min_index]:.2f})',
-         verticalalignment='top', horizontalalignment='left')
-
-plt.text(fine_time[knee_max_index], smooth_angular_velocity_knee[knee_max_index],
-         f'Knee Max: ({fine_time[knee_max_index]:.2f}, {smooth_angular_velocity_knee[knee_max_index]:.2f})',
-         verticalalignment='bottom', horizontalalignment='right')
-plt.text(fine_time[knee_min_index], smooth_angular_velocity_knee[knee_min_index],
-         f'Knee Min: ({fine_time[knee_min_index]:.2f}, {smooth_angular_velocity_knee[knee_min_index]:.2f})',
-         verticalalignment='top', horizontalalignment='left')
-
-plt.text(fine_time[hip_max_index], smooth_angular_velocity_hip[hip_max_index],
-         f'Hip Max: ({fine_time[hip_max_index]:.2f}, {smooth_angular_velocity_hip[hip_max_index]:.2f})',
-         verticalalignment='bottom', horizontalalignment='right')
-plt.text(fine_time[hip_min_index], smooth_angular_velocity_hip[hip_min_index],
-         f'Hip Min: ({fine_time[hip_min_index]:.2f}, {smooth_angular_velocity_hip[hip_min_index]:.2f})',
-         verticalalignment='top', horizontalalignment='left')
-
 points = []  # Store the clicked points
 
 def onclick(event):
