@@ -23,7 +23,7 @@ LeftAnkle = df['LeftAnkle'].tolist()
 RightAnkle = df['RightAnkle'].tolist()
 
 # IT IS OUR SETTINGS SECTION ALL CHANGES ONLY HERE
-graph = RightHip  # CHANGE THIS ONLY
+graph = RightKnee  # CHANGE THIS ONLY
 graph_name = [k for k, v in locals().items() if v is graph][0]
 
 print(time)
@@ -45,9 +45,6 @@ fine_time = np.linspace(time[1], time[-1], num=2000)
 
 # Interpolate the angular velocity values for the finer time array
 smooth_angular_velocity = interpolated_func(fine_time)
-
-# Set the y-axis display range from -3 to +3
-plt.ylim(-0.5, 0.5)
 
 # Create a scatter plot with smoothed line
 plt.plot(fine_time, smooth_angular_velocity, '-')
@@ -82,14 +79,24 @@ def onclick(event):
 max_index = np.argmax(smooth_angular_velocity)
 min_index = np.argmin(smooth_angular_velocity)
 
+angular_velocity_max = smooth_angular_velocity[max_index]
+print("angular_velocity_max" + str(angular_velocity_max))
+angular_velocity_min = smooth_angular_velocity[min_index]
+print("angular_velocity_min" + str(angular_velocity_min))
+
+top_threshold = angular_velocity_max * 1.5
+down_threshold = angular_velocity_min * 1.5
+# Set the y-axis display range from -3 to +3
+plt.ylim(down_threshold, top_threshold)
+
 # Plot maximum and minimum points
 plt.plot(fine_time[max_index], smooth_angular_velocity[max_index], 'ro')
 plt.plot(fine_time[min_index], smooth_angular_velocity[min_index], 'ro')
 
 # Display values for maximum and minimum points
-plt.text(fine_time[max_index], smooth_angular_velocity[max_index], f'({fine_time[max_index]:.2f}, {smooth_angular_velocity[max_index]:.2f})',
+plt.text(fine_time[max_index], smooth_angular_velocity[max_index], f'({fine_time[max_index]:.2f}, {angular_velocity_max:.2f})',
          verticalalignment='bottom', horizontalalignment='right')
-plt.text(fine_time[min_index], smooth_angular_velocity[min_index], f'({fine_time[min_index]:.2f}, {smooth_angular_velocity[min_index]:.2f})',
+plt.text(fine_time[min_index], smooth_angular_velocity[min_index], f'({fine_time[min_index]:.2f}, {angular_velocity_min:.2f})',
          verticalalignment='top', horizontalalignment='left')
 
 plt.gcf().canvas.mpl_connect('button_press_event', onclick)
