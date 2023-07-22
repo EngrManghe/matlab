@@ -2,33 +2,38 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
+import sys
+
+# Check if the filename is provided as a command-line argument
+if len(sys.argv) < 2:
+    print("Please provide the filename of the .xlsx file as a command-line argument.")
+    sys.exit(1)
+
+# Get the filename from the command-line argument
+filename = sys.argv[1]
 
 # Read the .xlsx file
-df = pd.read_excel('rawdata.xlsx')
+df = pd.read_excel(filename)    
+
 
 # Store 'A' column data in list_a
 time = df['Time (ms)'].tolist()
 
 # Create a dictionary to store body part data
-body_parts = {
-    'LeftShoulder': df['LeftShoulder'].tolist(),
-    'RightShoulder': df['RightShoulder'].tolist(),
-    'LeftElbow': df['LeftElbow'].tolist(),
-    'RightElbow': df['RightElbow'].tolist(),
-    'LeftHip': df['LeftHip'].tolist(),
-    'RightHip': df['RightHip'].tolist(),
-    'LeftKnee': df['LeftKnee'].tolist(),
-    'RightKnee': df['RightKnee'].tolist(),
-    'LeftAnkle': df['LeftAnkle'].tolist(),
-    'RightAnkle': df['RightAnkle'].tolist()
-}
+body_parts = {}
+for column in df.columns[1:]:  # Exclude the 'Time (ms)' column
+    body_parts[column] = df[column].tolist()
 
 # Initialize the first graph as 'RightKnee'
-current_graph_name = 'RightKnee'
-current_graph = body_parts[current_graph_name]
+#current_graph_name = 'RightKnee'
+#current_graph = body_parts[current_graph_name]
 
 # Calculate the time differences and angular displacements
 time_diff = np.diff(time)
+
+# Calculate the initial current_graph
+current_graph_name = list(body_parts.keys())[0]
+current_graph = body_parts[current_graph_name]
 angular_displacement = np.diff(current_graph)
 
 # Calculate the angular velocity
