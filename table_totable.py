@@ -14,7 +14,7 @@ all_data = []
 for f in os.listdir(directory):
     filename = os.path.join(directory, f)
     if os.path.isfile(filename):
-        #print(filename)
+        print(filename)
         df = pd.read_excel(filename) 
         time = df['Time (ms)'].tolist()
 
@@ -58,4 +58,5 @@ for f in os.listdir(directory):
         #print("angular_velocity_min" + str(angular_velocity_min))
         data = [current_graph_name, str(angular_velocity_min),str(angular_velocity_max), str(fine_time[min_index]), str(fine_time[max_index])]
         all_data.append(data)
-dataframe = pd.DataFrame(all_data, columns=['Gait', ''])
+dataframe = pd.DataFrame(all_data, columns=['Gait', 'VelocityMin','VelocityMax','TimeMin','TimeMax'])
+print(dataframe.to_string())
