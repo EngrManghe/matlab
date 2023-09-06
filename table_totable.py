@@ -12,11 +12,15 @@ if len(sys.argv) < 2:
 directory = sys.argv[1]
 all_data = []
 for f in os.listdir(directory):
+    #print(f)
     filename = os.path.join(directory, f)
     if os.path.isfile(filename):
-        print(filename)
-        df = pd.read_excel(filename) 
-        time = df['Time (ms)'].tolist()
+        #print(filename)
+        try:
+            df = pd.read_excel(filename)
+            time = df['Time (ms)'].tolist()
+        except:
+            continue
 
         # Create a dictionary to store body part data
         body_parts = {}
@@ -52,11 +56,13 @@ for f in os.listdir(directory):
         max_index = np.argmax(smooth_angular_velocity)
         min_index = np.argmin(smooth_angular_velocity)
 
-        angular_velocity_max = smooth_angular_velocity[max_index]
+        angular_velocity_max = round(smooth_angular_velocity[max_index],2)
         #print("angular_velocity_max" + str(angular_velocity_max))
-        angular_velocity_min = smooth_angular_velocity[min_index]
+        angular_velocity_min = round(smooth_angular_velocity[min_index],2)
         #print("angular_velocity_min" + str(angular_velocity_min))
-        data = [current_graph_name, str(angular_velocity_min),str(angular_velocity_max), str(fine_time[min_index]), str(fine_time[max_index])]
+        data = [current_graph_name, str(angular_velocity_min),str(angular_velocity_max), str(round(fine_time[min_index],2)), str(round(fine_time[max_index],2))]
         all_data.append(data)
 dataframe = pd.DataFrame(all_data, columns=['Gait', 'VelocityMin','VelocityMax','TimeMin','TimeMax'])
 print(dataframe.to_string())
+
+dataframe.to_csv("stats.csv")
