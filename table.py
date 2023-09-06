@@ -54,7 +54,7 @@ plt.plot(fine_time, smooth_angular_velocity, '-')
 # Customize the plot
 plt.title("Smoothed Angular Velocity " + current_graph_name)
 plt.xlabel("Time (ms)")
-plt.ylabel("Angular Velocity")
+plt.ylabel("Angular Velocity (rad/s)")
 
 plt.xticks(np.arange(fine_time[0], fine_time[-1] + 1, 500))
 
@@ -101,7 +101,7 @@ def next_graph(event):
     plt.plot(fine_time, smooth_angular_velocity, '-')
     plt.title("Smoothed Angular Velocity " + current_graph_name)
     plt.xlabel("Time (ms)")
-    plt.ylabel("Angular Velocity")
+    plt.ylabel("Angular Velocity (rad/s)")
     plt.xticks(np.arange(fine_time[0], fine_time[-1] + 1, 500))
     plt.ylim(down_threshold, top_threshold)
     plt.plot(fine_time[max_index], smooth_angular_velocity[max_index], 'ro')

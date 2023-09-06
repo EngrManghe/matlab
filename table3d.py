@@ -9,6 +9,7 @@ data = pd.read_excel('rawdata.xlsx')
 
 # Extract relevant columns
 time = data['Time (ms)']
+plt.ylabel("Angular Velocity (rad/s)")
 LeftHip = data['LeftHip']
 LeftKnee = data['LeftKnee']
 LeftAnkle = data['LeftAnkle']

@@ -10,19 +10,19 @@ df = pd.read_excel('rawdata.xlsx')
 time = df['Time (ms)'].tolist()
 
 # Store 'B' column data
-RightAnkle = df['RightAnkle'].tolist()
-RightKnee = df['RightKnee'].tolist()
-RightHip = df['RightHip'].tolist()
+leftAnkle = df['leftAnkle'].tolist()
+leftKnee = df['leftKnee'].tolist()
+leftHip = df['leftHip'].tolist()
 
 # Calculate the time differences and angular displacements
 time_diff_ankle = np.diff(time)
-angular_displacement_ankle = np.diff(RightAnkle)
+angular_displacement_ankle = np.diff(leftAnkle)
 
 time_diff_knee = np.diff(time)
-angular_displacement_knee = np.diff(RightKnee)
+angular_displacement_knee = np.diff(leftKnee)
 
 time_diff_hip = np.diff(time)
-angular_displacement_hip = np.diff(RightHip)
+angular_displacement_hip = np.diff(leftHip)
 
 # Calculate the angular velocity
 angular_velocity_ankle = angular_displacement_ankle / time_diff_ankle
@@ -46,14 +46,14 @@ smooth_angular_velocity_hip = interpolated_func_hip(fine_time)
 plt.ylim(-3, 3)
 
 # Create scatter plots with smoothed lines
-plt.plot(fine_time, smooth_angular_velocity_ankle, color='red', label='RightAnkle')
-plt.plot(fine_time, smooth_angular_velocity_knee, color='blue', label='RightKnee')
-plt.plot(fine_time, smooth_angular_velocity_hip, color='green', label='RightHip')
+plt.plot(fine_time, smooth_angular_velocity_ankle, color='red', label='leftAnkle')
+plt.plot(fine_time, smooth_angular_velocity_knee, color='blue', label='leftKnee')
+plt.plot(fine_time, smooth_angular_velocity_hip, color='green', label='leftHip')
 
 # Customize the plot
 plt.title("Smoothed Angular Velocity Scatter Plot")
 plt.xlabel("Time (ms)")
-plt.ylabel("Angular Velocity")
+plt.ylabel("Angular Velocity (rad/s)")
 plt.legend()
 
 plt.xticks(np.arange(fine_time[0], fine_time[-1]+1, 500))
