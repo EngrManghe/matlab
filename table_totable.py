@@ -20,6 +20,14 @@ for f in os.listdir(directory):
         except:
             continue
 
+        # Check if the filename contains 'angles' or 'positions'
+        if 'angles' in f:
+            output_csv = "angles.csv"
+        elif 'positions' in f:
+            output_csv = "positions.csv"
+        else:
+            output_csv = "others.csv"
+
         # Extract column names (body parts) excluding 'Time (ms)'
         body_part_columns = [col for col in df.columns if col != 'Time (ms)']
 
@@ -45,8 +53,10 @@ for f in os.listdir(directory):
 
             data = [current_graph_name, str(angular_velocity_min), str(angular_velocity_max),
                     str(round(fine_time[min_index], 2)), str(round(fine_time[max_index], 2))]
-            all_data.append(data)
 
-dataframe = pd.DataFrame(all_data, columns=['Gait', 'VelocityMin', 'VelocityMax', 'TimeMin', 'TimeMax'])
-print(dataframe.to_string())
-dataframe.to_csv("stats.csv")
+            # Append data to the appropriate CSV file
+            with open(output_csv, 'a') as csvfile:
+                csvfile.write(','.join(data) + '\n')
+
+# You can also print a message indicating which CSV file was generated
+print(f"Data written to {output_csv}")
