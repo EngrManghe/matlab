@@ -51,11 +51,14 @@ for f in os.listdir(directory):
             angular_velocity_max = round(smooth_angular_velocity[max_index], 2)
             angular_velocity_min = round(smooth_angular_velocity[min_index], 2)
 
-            data = [current_graph_name, str(angular_velocity_min), str(angular_velocity_max),
+            data = [f, current_graph_name, str(angular_velocity_min), str(angular_velocity_max),
                     str(round(fine_time[min_index], 2)), str(round(fine_time[max_index], 2))]
 
-            # Append data to the appropriate CSV file
+            # Append data to the appropriate CSV file with headers
             with open(output_csv, 'a') as csvfile:
+                # Check if the file is empty and write headers if needed
+                if os.path.getsize(output_csv) == 0:
+                    csvfile.write('[filename] [gate] [angular_velocity_min] [angular_velocity_max] [time_min] [time_max]\n')
                 csvfile.write(','.join(data) + '\n')
 
 # You can also print a message indicating which CSV file was generated

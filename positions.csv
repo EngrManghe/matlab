@@ -1,50 +1,51 @@
-SpineBase x (mm),-0.21,0.55,1439.91,1873.04
-SpineBase y (mm),-0.22,0.28,1736.72,1257.43
-SpineMid x (mm),-0.48,0.69,1444.31,1873.04
-SpineMid y (mm),-0.18,0.23,446.15,740.76
-Neck x (mm),-0.66,0.83,1446.51,1873.04
-Neck y (mm),-0.24,0.25,446.15,679.2
-Head x (mm),-1.36,0.83,3379.08,1873.04
-Head y (mm),-0.79,0.29,3350.49,701.18
-ShoulderLeft x (mm),-0.69,0.76,1444.31,1873.04
-ShoulderLeft y (mm),-0.3,0.25,1140.9,3383.47
-ElbowLeft x (mm),-0.59,0.76,1442.11,1873.04
-ElbowLeft y (mm),-0.32,0.47,1270.62,1334.38
-WristLeft x (mm),-0.59,0.79,1446.51,1873.04
-WristLeft y (mm),-0.48,0.46,3678.09,2748.08
-HandLeft x (mm),-0.55,0.87,1444.31,1875.23
-HandLeft y (mm),-0.36,0.6,1211.26,1426.72
-ShoulderRight x (mm),-0.59,0.83,1442.11,1873.04
-ShoulderRight y (mm),-0.28,0.43,362.6,1250.83
-ElbowRight x (mm),-0.59,0.66,1446.51,1873.04
-ElbowRight y (mm),-0.43,1.02,672.6,712.18
-WristRight x (mm),-0.69,1.03,1446.51,1875.23
-WristRight y (mm),-2.23,1.42,446.15,507.71
-HandRight x (mm),-0.69,0.95,1444.31,762.74
-HandRight y (mm),-1.17,0.52,446.15,1006.79
-HipLeft x (mm),-0.21,0.59,1442.11,1873.04
-HipLeft y (mm),-0.24,0.28,1206.86,1257.43
-KneeLeft x (mm),-1.3,0.83,1442.11,1870.84
-KneeLeft y (mm),-0.59,0.78,1275.02,1017.78
-AnkleLeft x (mm),-0.76,0.93,912.25,1873.04
-AnkleLeft y (mm),-2.17,1.58,2781.06,734.16
-FootLeft x (mm),-1.35,2.73,863.88,976.01
-FootLeft y (mm),-2.34,2.12,2413.89,2372.12
-HipRight x (mm),-0.28,0.55,1442.11,1873.04
-HipRight y (mm),-0.19,0.26,1734.52,1255.23
-KneeRight x (mm),-0.89,1.11,1422.32,1378.35
-KneeRight y (mm),-0.95,0.94,1512.47,1415.73
-AnkleRight x (mm),-1.06,0.89,206.5,1873.04
-AnkleRight y (mm),-2.25,2.07,1281.61,2642.55
-FootRight x (mm),-2.65,2.81,1580.62,1538.85
-FootRight y (mm),-2.55,1.81,1541.05,1734.52
-SpineShoulder x (mm),-0.59,0.79,1444.31,1873.04
-SpineShoulder y (mm),-0.23,0.22,446.15,679.2
-HandTipLeft x (mm),-0.69,0.91,1446.51,1875.23
-HandTipLeft y (mm),-0.4,0.64,4441.0,1417.93
-ThumbLeft x (mm),-0.56,0.87,1448.71,1875.23
-ThumbLeft y (mm),-1.48,1.97,1804.88,1011.19
-HandTipRight x (mm),-0.74,0.98,1448.71,771.54
-HandTipRight y (mm),-1.06,0.73,1774.1,1976.37
-ThumbRight x (mm),-1.51,0.92,4014.47,1039.77
-ThumbRight y (mm),-2.49,2.29,1347.57,1308.0
+[filename] [gate] [angular_velocity_min] [angular_velocity_max] [time_min] [time_max]
+1.1_positions (1).xlsx,SpineBase x (mm),-0.21,0.55,1439.91,1873.04
+1.1_positions (1).xlsx,SpineBase y (mm),-0.22,0.28,1736.72,1257.43
+1.1_positions (1).xlsx,SpineMid x (mm),-0.48,0.69,1444.31,1873.04
+1.1_positions (1).xlsx,SpineMid y (mm),-0.18,0.23,446.15,740.76
+1.1_positions (1).xlsx,Neck x (mm),-0.66,0.83,1446.51,1873.04
+1.1_positions (1).xlsx,Neck y (mm),-0.24,0.25,446.15,679.2
+1.1_positions (1).xlsx,Head x (mm),-1.36,0.83,3379.08,1873.04
+1.1_positions (1).xlsx,Head y (mm),-0.79,0.29,3350.49,701.18
+1.1_positions (1).xlsx,ShoulderLeft x (mm),-0.69,0.76,1444.31,1873.04
+1.1_positions (1).xlsx,ShoulderLeft y (mm),-0.3,0.25,1140.9,3383.47
+1.1_positions (1).xlsx,ElbowLeft x (mm),-0.59,0.76,1442.11,1873.04
+1.1_positions (1).xlsx,ElbowLeft y (mm),-0.32,0.47,1270.62,1334.38
+1.1_positions (1).xlsx,WristLeft x (mm),-0.59,0.79,1446.51,1873.04
+1.1_positions (1).xlsx,WristLeft y (mm),-0.48,0.46,3678.09,2748.08
+1.1_positions (1).xlsx,HandLeft x (mm),-0.55,0.87,1444.31,1875.23
+1.1_positions (1).xlsx,HandLeft y (mm),-0.36,0.6,1211.26,1426.72
+1.1_positions (1).xlsx,ShoulderRight x (mm),-0.59,0.83,1442.11,1873.04
+1.1_positions (1).xlsx,ShoulderRight y (mm),-0.28,0.43,362.6,1250.83
+1.1_positions (1).xlsx,ElbowRight x (mm),-0.59,0.66,1446.51,1873.04
+1.1_positions (1).xlsx,ElbowRight y (mm),-0.43,1.02,672.6,712.18
+1.1_positions (1).xlsx,WristRight x (mm),-0.69,1.03,1446.51,1875.23
+1.1_positions (1).xlsx,WristRight y (mm),-2.23,1.42,446.15,507.71
+1.1_positions (1).xlsx,HandRight x (mm),-0.69,0.95,1444.31,762.74
+1.1_positions (1).xlsx,HandRight y (mm),-1.17,0.52,446.15,1006.79
+1.1_positions (1).xlsx,HipLeft x (mm),-0.21,0.59,1442.11,1873.04
+1.1_positions (1).xlsx,HipLeft y (mm),-0.24,0.28,1206.86,1257.43
+1.1_positions (1).xlsx,KneeLeft x (mm),-1.3,0.83,1442.11,1870.84
+1.1_positions (1).xlsx,KneeLeft y (mm),-0.59,0.78,1275.02,1017.78
+1.1_positions (1).xlsx,AnkleLeft x (mm),-0.76,0.93,912.25,1873.04
+1.1_positions (1).xlsx,AnkleLeft y (mm),-2.17,1.58,2781.06,734.16
+1.1_positions (1).xlsx,FootLeft x (mm),-1.35,2.73,863.88,976.01
+1.1_positions (1).xlsx,FootLeft y (mm),-2.34,2.12,2413.89,2372.12
+1.1_positions (1).xlsx,HipRight x (mm),-0.28,0.55,1442.11,1873.04
+1.1_positions (1).xlsx,HipRight y (mm),-0.19,0.26,1734.52,1255.23
+1.1_positions (1).xlsx,KneeRight x (mm),-0.89,1.11,1422.32,1378.35
+1.1_positions (1).xlsx,KneeRight y (mm),-0.95,0.94,1512.47,1415.73
+1.1_positions (1).xlsx,AnkleRight x (mm),-1.06,0.89,206.5,1873.04
+1.1_positions (1).xlsx,AnkleRight y (mm),-2.25,2.07,1281.61,2642.55
+1.1_positions (1).xlsx,FootRight x (mm),-2.65,2.81,1580.62,1538.85
+1.1_positions (1).xlsx,FootRight y (mm),-2.55,1.81,1541.05,1734.52
+1.1_positions (1).xlsx,SpineShoulder x (mm),-0.59,0.79,1444.31,1873.04
+1.1_positions (1).xlsx,SpineShoulder y (mm),-0.23,0.22,446.15,679.2
+1.1_positions (1).xlsx,HandTipLeft x (mm),-0.69,0.91,1446.51,1875.23
+1.1_positions (1).xlsx,HandTipLeft y (mm),-0.4,0.64,4441.0,1417.93
+1.1_positions (1).xlsx,ThumbLeft x (mm),-0.56,0.87,1448.71,1875.23
+1.1_positions (1).xlsx,ThumbLeft y (mm),-1.48,1.97,1804.88,1011.19
+1.1_positions (1).xlsx,HandTipRight x (mm),-0.74,0.98,1448.71,771.54
+1.1_positions (1).xlsx,HandTipRight y (mm),-1.06,0.73,1774.1,1976.37
+1.1_positions (1).xlsx,ThumbRight x (mm),-1.51,0.92,4014.47,1039.77
+1.1_positions (1).xlsx,ThumbRight y (mm),-2.49,2.29,1347.57,1308.0
