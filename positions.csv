@@ -1,4 +1,4 @@
-[filename] [gate] [angular_velocity_min] [angular_velocity_max] [time_min] [time_max]
+[filename], [gate], [angular_velocity_min], [angular_velocity_max], [time_min], [time_max]
 1.1_positions (1).xlsx,SpineBase x (mm),-0.21,0.55,1439.91,1873.04
 1.1_positions (1).xlsx,SpineBase y (mm),-0.22,0.28,1736.72,1257.43
 1.1_positions (1).xlsx,SpineMid x (mm),-0.48,0.69,1444.31,1873.04

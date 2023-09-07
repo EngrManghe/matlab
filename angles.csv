@@ -1,4 +1,4 @@
-[filename] [gate] [angular_velocity_min] [angular_velocity_max] [time_min] [time_max]
+[filename], [gate], [angular_velocity_min], [angular_velocity_max], [time_min], [time_max]
 1.1_angles.xlsx,LeftShoulder,-0.09,0.08,1178.28,3148.22
 1.1_angles.xlsx,RightShoulder,-0.09,0.07,1246.44,784.73
 1.1_angles.xlsx,LeftElbow,-0.28,0.27,3146.03,1275.02

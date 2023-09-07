@@ -58,7 +58,7 @@ for f in os.listdir(directory):
             with open(output_csv, 'a') as csvfile:
                 # Check if the file is empty and write headers if needed
                 if os.path.getsize(output_csv) == 0:
-                    csvfile.write('[filename] [gate] [angular_velocity_min] [angular_velocity_max] [time_min] [time_max]\n')
+                    csvfile.write('[filename], [gate], [angular_velocity_min], [angular_velocity_max], [time_min], [time_max]\n')
                 csvfile.write(','.join(data) + '\n')
 
 # You can also print a message indicating which CSV file was generated
