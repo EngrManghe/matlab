@@ -25,7 +25,7 @@ rightElbow = df['RightElbow'].tolist()
 
 # Create a figure and subplot for left body parts
 fig_left, axs_left = plt.subplots(figsize=(10, 8))
-fig_left.suptitle("Smoothed Angular Velocity Scatter Plot (Left Body Parts)")
+fig_left.suptitle("Smoothed Angular Velocity Scatter Plot (Left Joints)")
 
 # Create a list of left body part data
 left_body_parts = [leftAnkle, leftKnee, leftHip, leftShoulder, leftElbow]
@@ -66,7 +66,7 @@ axs_left.legend()
 
 # Create a figure and subplot for right body parts
 fig_right, axs_right = plt.subplots(figsize=(10, 8))
-fig_right.suptitle("Smoothed Angular Velocity Scatter Plot (Right Body Parts)")
+fig_right.suptitle("Smoothed Angular Velocity Scatter Plot (Right Joints)")
 
 # Create a list of right body part data
 right_body_parts = [rightAnkle, rightKnee, rightHip, rightShoulder, rightElbow]
