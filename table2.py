@@ -2,115 +2,104 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
+import sys
 
-# Read the .xlsx file
-df = pd.read_excel('rawdata.xlsx')
+class AngularVelocityPlotter:
+    def __init__(self, file_path):
+        self.df = pd.read_excel(file_path)
+        self.time = self.df['Time (ms)'].tolist()
+        self.body_parts = ['LeftAnkle', 'LeftKnee', 'LeftHip', 'LeftShoulder', 'LeftElbow',
+                        'RightAnkle', 'RightKnee', 'RightHip', 'RightShoulder', 'RightElbow']
 
-# Store 'A' column data in list_a
-time = df['Time (ms)'].tolist()
+        self.body_part_names = ['Left Ankle', 'Left Knee', 'Left Hip', 'Left Shoulder', 'Left Elbow',
+                                'Right Ankle', 'Right Knee', 'Right Hip', 'Right Shoulder', 'Right Elbow']
 
-# Store 'B' column data for left body parts
-leftAnkle = df['LeftAnkle'].tolist()
-leftKnee = df['LeftKnee'].tolist()
-leftHip = df['LeftHip'].tolist()
-leftShoulder = df['LeftShoulder'].tolist()
-leftElbow = df['LeftElbow'].tolist()
+        self.selected_line = None
+        self.max_min_text = None  # Initialize max_min_text to None
 
-# Store 'B' column data for right body parts
-rightAnkle = df['RightAnkle'].tolist()
-rightKnee = df['RightKnee'].tolist()
-rightHip = df['RightHip'].tolist()
-rightShoulder = df['RightShoulder'].tolist()
-rightElbow = df['RightElbow'].tolist()
+    def calculate_angular_velocity(self, body_part_data):
+        time_diff = np.diff(self.time)
+        angular_displacement = np.diff(body_part_data)
+        return angular_displacement / time_diff
 
-# Create a figure and subplot for left body parts
-fig_left, axs_left = plt.subplots(figsize=(10, 8))
-fig_left.suptitle("Smoothed Angular Velocity Scatter Plot (Left Joints)")
+    def plot_smoothed_angular_velocity(self, axs, body_part_name, body_part_data, title):
+        angular_velocity = self.calculate_angular_velocity(body_part_data)
+        interpolated_func = interp1d(self.time[1:], angular_velocity, kind='cubic')
+        fine_time = np.linspace(self.time[1], self.time[-1], num=2000)
+        smooth_angular_velocity = interpolated_func(fine_time)
 
-# Create a list of left body part data
-left_body_parts = [leftAnkle, leftKnee, leftHip, leftShoulder, leftElbow]
-body_part_names = ['Ankle', 'Knee', 'Hip', 'Shoulder', 'Elbow']
+        max_index = np.argmax(smooth_angular_velocity)
+        min_index = np.argmin(smooth_angular_velocity)
 
-# Plot all left body parts in the left subplot
-# Plot all left body parts in the left subplot
-for i in range(len(body_part_names)):
-    left_body_part = left_body_parts[i]
-    time_diff_left = np.diff(time)
-    angular_displacement_left = np.diff(left_body_part)
-    angular_velocity_left = angular_displacement_left / time_diff_left
+        line, = axs.plot(fine_time, smooth_angular_velocity, label=body_part_name, picker=5)
+        line.set_picker(10)  # Increase the pick radius for easier clicking
+        line.figure.canvas.mpl_connect('pick_event', self.on_line_click)  # Connect the pick event to the click handler
 
-    interpolated_func_left = interp1d(time[1:], angular_velocity_left, kind='cubic')
-    fine_time_left = np.linspace(time[1], time[-1], num=2000)
-    smooth_angular_velocity_left = interpolated_func_left(fine_time_left)
+        # Add red dots for Maximum and blue dots for Minimum points
+        axs.plot(fine_time[max_index], smooth_angular_velocity[max_index], 'ro', label=f'Max ({fine_time[max_index]:.2f} ms, {smooth_angular_velocity[max_index]:.2f} rad/s)')
+        axs.plot(fine_time[min_index], smooth_angular_velocity[min_index], 'bo', label=f'Min ({fine_time[min_index]:.2f} ms, {smooth_angular_velocity[min_index]:.2f} rad/s)')
 
-    max_index_left = np.argmax(smooth_angular_velocity_left)
-    min_index_left = np.argmin(smooth_angular_velocity_left)
+        axs.set_xlabel("Time (ms)")
+        axs.set_ylabel("Angular Velocity (rad/s)")
+        axs.legend()
+        axs.set_title(title)
 
-    axs_left.plot(fine_time_left, smooth_angular_velocity_left, label=f'Left {body_part_names[i]}')
+        return max_index, min_index, smooth_angular_velocity[max_index], smooth_angular_velocity[min_index]
 
-    # Plot maximum and minimum points
-    axs_left.plot(fine_time_left[max_index_left], smooth_angular_velocity_left[max_index_left], 'ro', label='Max')
-    axs_left.plot(fine_time_left[min_index_left], smooth_angular_velocity_left[min_index_left], 'bo', label='Min')
+    def plot_left_and_right(self, side):
+        fig, axs = plt.subplots(figsize=(10, 8))
+        max_indices, min_indices = [], []
+        for i, body_part in enumerate(self.body_parts):
+            if (side == 'left' and i < len(self.body_parts) // 2) or (side == 'right' and i >= len(self.body_parts) // 2):
+                max_idx, min_idx, max_val, min_val = self.plot_smoothed_angular_velocity(axs, self.body_part_names[i], self.df[body_part].tolist(),
+                                                    f"Smoothed Angular Velocity Scatter Plot ({side.capitalize()} Joints)")
+                max_indices.append((max_idx, max_val))
+                min_indices.append((min_idx, min_val))
 
-    # Display values for maximum and minimum points
-    max_text = f'Max: ({fine_time_left[max_index_left]:.2f} ms, {smooth_angular_velocity_left[max_index_left]:.2f} rad/s)'
-    min_text = f'Min: ({fine_time_left[min_index_left]:.2f} ms, {smooth_angular_velocity_left[min_index_left]:.2f} rad/s)'
-    axs_left.text(fine_time_left[max_index_left], smooth_angular_velocity_left[max_index_left], max_text,
-                  verticalalignment='bottom', horizontalalignment='left')
-    axs_left.text(fine_time_left[min_index_left], smooth_angular_velocity_left[min_index_left], min_text,
-                  verticalalignment='top', horizontalalignment='left')
+        plt.show()  # Show the plot
+        return max_indices, min_indices
 
-axs_left.set_xlabel("Time (ms)")
-axs_left.set_ylabel("Angular Velocity (rad/s)")
-axs_left.legend()
+    def on_line_click(self, event):
+        if event.mouseevent.button == 1:  # Check if the left mouse button is clicked
+            line = event.artist
+            if self.selected_line:
+                self.selected_line.set_linewidth(1.0)  # Reset the line thickness of the previously selected line
+                if self.max_min_text:  # Check if max_min_text is not None before removing it
+                    self.max_min_text.remove()  # Remove the previous max and min text
+            self.selected_line = line
+            line.set_linewidth(3.0)  # Increase line thickness
+            line.figure.canvas.draw()
 
-# Create a figure and subplot for right body parts
-fig_right, axs_right = plt.subplots(figsize=(10, 8))
-fig_right.suptitle("Smoothed Angular Velocity Scatter Plot (Right Joints)")
+            max_val, min_val = line.get_data()
+            max_index = np.argmax(max_val)
+            min_index = np.argmin(min_val)
 
-# Create a list of right body part data
-right_body_parts = [rightAnkle, rightKnee, rightHip, rightShoulder, rightElbow]
+            max_time = self.time[max_index]
+            min_time = self.time[min_index]
 
-# Plot all right body parts in the right subplot
-for i in range(len(body_part_names)):
-    right_body_part = right_body_parts[i]
-    time_diff_right = np.diff(time)
-    angular_displacement_right = np.diff(right_body_part)
-    angular_velocity_right = angular_displacement_right / time_diff_right
+            max_angular_velocity = max_val[max_index]
+            min_angular_velocity = min_val[min_index]
 
-    interpolated_func_right = interp1d(time[1:], angular_velocity_right, kind='cubic')
-    fine_time_right = np.linspace(time[1], time[-1], num=2000)
-    smooth_angular_velocity_right = interpolated_func_right(fine_time_right)
+            # Add text for max and min values
+            self.max_min_text = line.axes.text(max_time, max_angular_velocity, f'Max ({max_time:.2f} ms, {max_angular_velocity:.2f} rad/s)', color='r')
+            line.axes.text(min_time, min_angular_velocity, f'Min ({min_time:.2f} ms, {min_angular_velocity:.2f} rad/s)', color='b')
+            line.figure.canvas.draw()
 
-    max_index_right = np.argmax(smooth_angular_velocity_right)
-    min_index_right = np.argmin(smooth_angular_velocity_right)
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: py script.py filename.xlsx [left|right]")
+        sys.exit(1)
 
-    axs_right.plot(fine_time_right, smooth_angular_velocity_right, label=f'right {body_part_names[i]}')
+    file_path = sys.argv[1]
+    side = sys.argv[2].lower()
 
-    # Plot maximum and minimum points
-    axs_right.plot(fine_time_right[max_index_right], smooth_angular_velocity_right[max_index_right], 'ro', label='Max')
-    axs_right.plot(fine_time_right[min_index_right], smooth_angular_velocity_right[min_index_right], 'bo', label='Min')
+    if side not in ['left', 'right']:
+        print("Invalid side argument. Please use 'left' or 'right'.")
+        sys.exit(1)
 
-    # Display values for maximum and minimum points
-    max_text = f'Max: ({fine_time_right[max_index_right]:.2f} ms, {smooth_angular_velocity_right[max_index_right]:.2f} rad/s)'
-    min_text = f'Min: ({fine_time_right[min_index_right]:.2f} ms, {smooth_angular_velocity_right[min_index_right]:.2f} rad/s)'
-    axs_right.text(fine_time_right[max_index_right], smooth_angular_velocity_right[max_index_right], max_text,
-                  verticalalignment='bottom', horizontalalignment='right')
-    axs_right.text(fine_time_right[min_index_right], smooth_angular_velocity_right[min_index_right], min_text,
-                  verticalalignment='top', horizontalalignment='right')
+    plotter = AngularVelocityPlotter(file_path)
+    max_indices, min_indices = plotter.plot_left_and_right(side)
 
-axs_left.set_xlabel("Time (ms)")
-axs_left.set_ylabel("Angular Velocity (rad/s)")
-axs_left.legend()
-
-axs_right.set_xlabel("Time (ms)")
-axs_right.set_ylabel("Angular Velocity (rad/s)")
-axs_right.legend()
-
-# Show the left plot in a separate window
-plt.figure(fig_left.number)
-plt.show()
-
-# Show the right plot in a separate window
-plt.figure(fig_right.number)
-plt.show()
+    for i, body_part_name in enumerate(plotter.body_part_names):
+        if (side == 'left' and i < len(plotter.body_part_names) // 2) or (side == 'right' and i >= len(plotter.body_part_names) // 2):
+            print(f'{side.capitalize()} {body_part_name} - Max: {max_indices[i][1]:.2f} ms, {max_indices[i][0]:.2f} rad/s, Min: {min_indices[i][1]:.2f} ms, {min_indices[i][0]:.2f} rad/s')
