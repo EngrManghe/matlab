@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
 # Read the .xlsx file
-df = pd.read_excel('rawdata.xlsx')
+df = pd.read_excel('1.1_angles_ballet.xlsx')
 
 # Store 'A' column data in list_a
 time = df['Time (ms)'].tolist()
