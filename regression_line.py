@@ -41,6 +41,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Plot Position and Regression Line')
     parser.add_argument('file_path', type=str, help='Path to the Excel file')
     parser.add_argument('position_label', type=str, help='Position label (e.g., X, Y, Z)')
+    #py .\regression_line.py .\1.1_angles_ballet.xlsx LeftShoulder
     args = parser.parse_args()
 
     file_path = args.file_path
